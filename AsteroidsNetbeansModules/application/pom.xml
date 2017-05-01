@@ -51,6 +51,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>Core</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>dk.sdu.mmmi.cbse</groupId>
+                    <artifactId>Player</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -101,6 +107,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>SpringPlayer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SpringContainer</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
