@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: dk.sdu.mmmi.cbse.osgienemy
+Bundle-Name: OSGiEnemy
+Bundle-ActivationPolicy: lazy
+Import-Package: dk.sdu.mmmi.cbse.common.data,dk.sdu.mmmi.cbse.common.events,dk.sdu.mmmi.cbse.common.services
+Service-Component: META-INF/entityprocessor.xml, META-INF/gameplugin.xml
