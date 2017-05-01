@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bundle-SymbolicName: dk.sdu.mmmi.cbse.osgiateroid
+Bundle-SymbolicName: dk.sdu.mmmi.cbse.osgiasteroid
 Bundle-Name: OSGiAsteroid
 Bundle-ActivationPolicy: lazy
 Import-Package: dk.sdu.mmmi.cbse.common.data,dk.sdu.mmmi.cbse.common.events,dk.sdu.mmmi.cbse.common.services

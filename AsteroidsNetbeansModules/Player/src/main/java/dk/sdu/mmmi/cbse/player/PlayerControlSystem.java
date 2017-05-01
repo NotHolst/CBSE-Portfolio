@@ -1,7 +1,6 @@
 package dk.sdu.mmmi.cbse.player;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.LEFT;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.RIGHT;
@@ -12,6 +11,7 @@ import dk.sdu.mmmi.cbse.common.events.Event;
 import static dk.sdu.mmmi.cbse.common.events.EventType.PLAYER_SHOOT;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.commonplayer.Player;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
@@ -31,12 +31,13 @@ public class PlayerControlSystem implements IEntityProcessingService, IGamePlugi
 
         Entity player = createPlayerShip(gameData);
         world.addEntity(player);
+        updateShape(player);
     }
 
     @Override
     public void process(GameData gameData, World world) {
 
-        for (Entity player : world.getEntities(PLAYER)) {
+        for (Entity player : world.getEntities(Player.class)) {
 
             float x = player.getX();
             float y = player.getY();
@@ -117,9 +118,8 @@ public class PlayerControlSystem implements IEntityProcessingService, IGamePlugi
         entity.setShapeY(shapey);
     }
 
-    private Entity createPlayerShip(GameData gameData) {
-        Entity playerShip = new Entity();
-        playerShip.setType(PLAYER);
+    private Player createPlayerShip(GameData gameData) {
+        Player playerShip = new Player();
 
         playerShip.setPosition(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
 
@@ -143,8 +143,8 @@ public class PlayerControlSystem implements IEntityProcessingService, IGamePlugi
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        for (Entity entity : world.getEntities(PLAYER)) {
-            world.removeEntity(entity);
+        for (Entity entity : world.getEntities(Player.class)) {
+            //world.removeEntity(entity);
         }
     }
 

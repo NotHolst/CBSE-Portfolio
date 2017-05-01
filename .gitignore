@@ -12,3 +12,9 @@
 /AsteroidsNetbeansModules/OSGiEnemy/target/
 /AsteroidsNetbeansModules/OSGiAsteroidSplitter/target/
 /AsteroidsNetbeansModules/OSGiAsteroid/target/
+/AsteroidsNetbeansModules/CommonAsteroids/target/
+/AsteroidsNetbeansModules/CommonBullet/target/
+/AsteroidsNetbeansModules/CommonEnemy/target/
+/AsteroidsNetbeansModules/CommonPlayer/target/
+/AsteroidsNetbeansModules/SpringPlayer/target/
+/AsteroidsNetbeansModules/SpringContainer/target/

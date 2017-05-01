@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import dk.sdu.mmmi.cbse.common.bullet.Bullet;
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
@@ -82,7 +82,7 @@ public class Game implements ApplicationListener {
     private void draw() {
         for (Entity entity : world.getEntities()) {
             sr.setColor(1, 1, 1, 1);
-            if(entity.getType() == EntityType.BULLET)
+            if(entity instanceof Bullet)
                 sr.setColor(Color.GREEN);
 
             sr.begin(ShapeRenderer.ShapeType.Line);

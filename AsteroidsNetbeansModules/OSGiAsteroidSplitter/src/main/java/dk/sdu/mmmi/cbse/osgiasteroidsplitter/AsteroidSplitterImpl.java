@@ -5,8 +5,8 @@
  */
 package dk.sdu.mmmi.cbse.osgiasteroidsplitter;
 
+import dk.sdu.mmmi.cbse.common.asteroids.Asteroid;
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IAsteroidSplitter;
 import java.util.Random;
@@ -17,8 +17,7 @@ public class AsteroidSplitterImpl implements IAsteroidSplitter{
     public void splitAsteroid(Entity asteroid, World world) {
         if(asteroid.getRadius() > 20)
             for(int i = 0; i < 2; i++){
-                Entity a = new Entity();
-                a.setType(EntityType.ASTEROIDS);
+                Asteroid a = new Asteroid();
                 a.setRadius(asteroid.getRadius()/2);
                 a.setPosition(asteroid.getX(), asteroid.getY());
                 Random r = new Random();

@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.cbse.osgienemy;
 
-import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.events.Event;
@@ -12,7 +11,6 @@ public class EnemySystem implements IEntityProcessingService, IGamePluginService
 
     @Override
     public void start(GameData gameData, World world) {
-        gameData.addEvent(new Event(EventType.PLAYER_SHOOT, world.getEntities(EntityType.PLAYER).get(0).getID()));
     }
 
     @Override

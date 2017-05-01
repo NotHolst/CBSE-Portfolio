@@ -1,7 +1,8 @@
 package dk.sdu.mmmi.cbse.osgiasteroid;
 
+import dk.sdu.mmmi.cbse.common.asteroids.Asteroid;
+import dk.sdu.mmmi.cbse.common.bullet.Bullet;
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.events.Event;
@@ -32,12 +33,12 @@ public class AsteroidSystem implements IEntityProcessingService {
             }
         }
         
-        for( Entity asteroid : world.getEntities(EntityType.ASTEROIDS)){
+        for( Entity asteroid : world.getEntities(Asteroid.class)){
             asteroid.setRadians((float) (asteroid.getRadians() + ((-0.5)+new Random(asteroid.getID().hashCode()).nextDouble())*0.001f));
             asteroid.setX(asteroid.getX() + (asteroid.getDx()*gameData.getDelta()));
             asteroid.setY(asteroid.getY() + (asteroid.getDy()*gameData.getDelta()));
             updateShape(asteroid);
-            for(Entity bullet : world.getEntities(EntityType.BULLET)){
+            for(Entity bullet : world.getEntities(Bullet.class)){
                 if(Math.sqrt(Math.pow(bullet.getX() - asteroid.getX(), 2) + Math.pow(bullet.getY() - asteroid.getY(), 2)) < bullet.getRadius() + asteroid.getRadius()){
                     world.removeEntity(bullet);
                     asteroidSplitter.splitAsteroid(asteroid, world);

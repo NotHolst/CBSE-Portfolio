@@ -30,6 +30,11 @@
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonAsteroids</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,8 +1,7 @@
 package dk.sdu.mmmi.cbse.bullet;
 
+import dk.sdu.mmmi.cbse.common.bullet.Bullet;
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.EntityType;
-import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.LEFT;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.RIGHT;
@@ -14,6 +13,7 @@ import dk.sdu.mmmi.cbse.common.events.EventType;
 import static dk.sdu.mmmi.cbse.common.events.EventType.PLAYER_SHOOT;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.commonplayer.Player;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
@@ -42,14 +42,14 @@ public class BulletSystem implements IEntityProcessingService, IGamePluginServic
 
         for(Event shootEvent : gameData.getEvents()){
             if(shootEvent.getType() == EventType.PLAYER_SHOOT){
-                for(Entity player : world.getEntities(EntityType.PLAYER)){
+                for(Entity player : world.getEntities(Player.class)){
                     world.addEntity(createBullet(player));
                     gameData.removeEvent(shootEvent);
                 }
             }
         }
         
-        for( Entity bullet : world.getEntities(EntityType.BULLET)){
+        for( Entity bullet : world.getEntities(Bullet.class)){
             if(bullet.getExpiration() <= 0) world.removeEntity(bullet);
             bullet.setX(bullet.getX() + (bullet.getDx()*gameData.getDelta()));
             bullet.setY(bullet.getY() + (bullet.getDy()*gameData.getDelta()));
@@ -83,8 +83,7 @@ public class BulletSystem implements IEntityProcessingService, IGamePluginServic
     }
 
     private Entity createBullet(Entity player){
-        Entity bullet = new Entity();
-        bullet.setType(EntityType.BULLET);
+        Bullet bullet = new Bullet();
         bullet.setRadius(2);
         bullet.setRadians(player.getRadians());
         bullet.setMaxSpeed(200);
@@ -99,7 +98,7 @@ public class BulletSystem implements IEntityProcessingService, IGamePluginServic
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        for (Entity entity : world.getEntities(EntityType.BULLET)) {
+        for (Entity entity : world.getEntities(Bullet.class)) {
             world.removeEntity(entity);
         }
     }
