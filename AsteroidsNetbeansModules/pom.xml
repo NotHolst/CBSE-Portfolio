@@ -60,12 +60,12 @@
         <module>Common</module>
         <module>Core</module>
         <module>Player</module>
-        <module>SilentUpdate</module>
-        <module>Asteroid</module>
         <module>Bullet</module>
         <module>EntityWrapper</module>
         <module>OSGiExtender</module>
         <module>OSGiEnemy</module>
+    <module>OSGiAsteroidSplitter</module>
+    <module>OSGiAsteroid</module>
   </modules>
 
     <properties>
