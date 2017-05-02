@@ -3,8 +3,9 @@ package dk.sdu.mmmi.cbse.common.data;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class Entity implements Serializable {
+public final class Entity implements Serializable {
     private final UUID ID = UUID.randomUUID();
+    private EntityType type;
     private float x;
     private float y;
     private float dx;
@@ -59,6 +60,14 @@ public class Entity implements Serializable {
 
     public String getID() {
         return ID.toString();
+    }
+
+    public void setType(EntityType type) {
+        this.type = type;
+    }
+
+    public EntityType getType() {
+        return type;
     }
 
     public float getDx() {
@@ -152,5 +161,9 @@ public class Entity implements Serializable {
 
     public void setRotationSpeed(int rotationSpeed) {
         this.rotationSpeed = rotationSpeed;
+    }
+
+    public boolean isType(EntityType entityType) {
+        return this.type.equals(entityType);
     }
 }

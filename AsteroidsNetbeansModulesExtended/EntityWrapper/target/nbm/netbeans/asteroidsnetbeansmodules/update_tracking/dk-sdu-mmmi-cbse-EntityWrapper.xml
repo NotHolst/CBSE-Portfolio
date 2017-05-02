@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="dk.sdu.mmmi.cbse.EntityWrapper">
+    <module_version install_time="1493693132292" last="true" origin="installer" specification_version="1.0">
+        <file crc="411261823" name="config/Modules/dk-sdu-mmmi-cbse-EntityWrapper.xml"/>
+        <file crc="3405215140" name="modules/dk-sdu-mmmi-cbse-EntityWrapper.jar"/>
+    </module_version>
+</module>

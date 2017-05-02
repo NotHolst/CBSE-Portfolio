@@ -1,12 +1,25 @@
 package dk.sdu.mmmi.cbse.asteroidsnetbeansmodules;
 
+import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import junit.framework.Test;
 import org.netbeans.junit.NbModuleSuite;
 import org.netbeans.junit.NbTestCase;
+import static java.nio.file.Files.copy;
+import static java.nio.file.Paths.get;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import org.openide.util.Lookup;
 
 public class ApplicationTest extends NbTestCase {
 
+    private static final String ADD_WRAPPER_UPDATES_FILE = "D:\\GitHub\\CBSE-Portfolio\\AsteroidsNetbeansModules\\application\\src\\test\\resources\\wrapper\\updates.xml";
+    private static final String REM_WRAPPER_UPDATES_FILE = "D:\\GitHub\\CBSE-Portfolio\\AsteroidsNetbeansModules\\application\\src\\test\\resources\\nowrapper\\updates.xml";;
+    private static final String UPDATES_FILE = "D:\\updates.xml";
+    
     public static Test suite() {
         return NbModuleSuite.createConfiguration(ApplicationTest.class).
                 gui(false).
@@ -21,12 +34,35 @@ public class ApplicationTest extends NbTestCase {
         super(n);
     }
 
-    public void testApplication() {
-        // pass if there are merely no warnings/exceptions
-        /* Example of using Jelly Tools (additional test dependencies required) with gui(true):
-        new ActionNoBlock("Help|About", null).performMenu();
-        new NbDialogOperator("About").closeByButton();
-         */
+    public void testApplication() throws InterruptedException, IOException {
+        copy(get(REM_WRAPPER_UPDATES_FILE), get(UPDATES_FILE), REPLACE_EXISTING);
+        
+        // SETUP
+        List<IEntityProcessingService> processors = new CopyOnWriteArrayList<>();
+        List<IGamePluginService> plugins = new CopyOnWriteArrayList<>();
+        update(processors, plugins);
+        
+        copy(get(ADD_WRAPPER_UPDATES_FILE), get(UPDATES_FILE), REPLACE_EXISTING);
+        Thread.sleep(10000);
+        update(processors, plugins);
+        
+        assertEquals("One Processor", 4, processors.size());
+        assertEquals("One Plugin", 4, plugins.size());
+        
+        copy(get(REM_WRAPPER_UPDATES_FILE), get(UPDATES_FILE), REPLACE_EXISTING);
+        Thread.sleep(10000);
+        update(processors, plugins);
+        
+        assertEquals("No Processors END", 3, processors.size());
+        assertEquals("No Plugins END", 3, plugins.size());
+        
+    }
+    
+    private void update(List<IEntityProcessingService> processors, List<IGamePluginService> plugins){
+        processors.clear();
+        processors.addAll(Lookup.getDefault().lookupAll(IEntityProcessingService.class));
+        plugins.clear();
+        plugins.addAll(Lookup.getDefault().lookupAll(IGamePluginService.class));
     }
 
 }

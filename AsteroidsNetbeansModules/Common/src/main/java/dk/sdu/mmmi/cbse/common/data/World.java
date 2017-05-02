@@ -31,20 +31,15 @@ public class World {
         return entityMap.values();
     }
 
-    public <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes) {
+    public List<Entity> getEntities(EntityType... entityTypes) {
         List<Entity> r = new ArrayList<>();
         for (Entity e : getEntities()) {
-            for (Class<E> entityType : entityTypes) {
-                if (entityType.equals(e.getClass())) {
+            for (EntityType entityType : entityTypes) {
+                if (entityType.equals(e.getType())) {
                     r.add(e);
                 }
             }
         }
         return r;
     }
-
-    public Entity getEntity(String ID) {
-        return entityMap.get(ID);
-    }
-
 }
